@@ -1,6 +1,6 @@
-# 📌 Nome do Projeto
+# 📌 Loggable
 
-Client para comunicação com o Loggable-API, fornecendo ao usuário um conforto ao apresentar uma interface amigavel e de fácil entendimento.
+Client para comunicação com o [Loggable-API](https://github.com/JobsonDeveloper/Loggable-api), fornecendo ao usuário um conforto ao apresentar uma interface amigavel e de fácil entendimento.
 Através dela o usuário pode:
 - Realizar o cadastro no Loggagle, garantindo uma conta única baseada no seu E-mail e uma senha segura.
   
@@ -20,22 +20,24 @@ Este projeto de gestão de usuários utiliza Next 15+ e React, com forte tipagem
 - 🌐 cURL
 - 🧩 Git
 
-# 🚀 Como Executar o Projeto
 ### ✅ Pré-requisitos
-- Java 21+
-- Maven 3.9+
-- Docker
+- Node.js
+- pnpm, npm ou  yarn
+- Git
+- Navegador moderno
+- IDE / Editor de código
 
+# 🚀 Como Executar o Projeto
 ### ▶️ Rodando a aplicação localmente
 #### Clone o repositório
 ```
-git clone https://github.com/JobsonDeveloper/Loggagle-API.git
+git clone https://github.com/JobsonDeveloper/Loggable-client.git
 ```
 ```
-cd Loggagle-API
+cd Loggagle-client
 ```
 
-#### Suba o banco com o Docker
+#### Suba o servidor
 ```
-docker-compose up -d
+pnpm run dev
 ```
