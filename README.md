@@ -6,7 +6,7 @@ Através dela o usuário pode:
   
 - Realizar o Login na sua conta, tendo segurança, clareza das informações e um feedback agradável para possíveis erros.
 
-Este projeto de gestão de usuários utiliza Next 15+ e React, com forte tipagem através do TypeScript, Gerenciamento de estados blobais com o Redux toolkit, utilização de componentes do Material UI que fortalecem questões de UX/UI da aplicação, Tailwind CSS para estilizações mais específicar e implementação de responsividade e Curl para a realização de requisições.
+Este projeto de gestão de usuários utiliza Next 15+ e React, com forte tipagem através do TypeScript, Gerenciamento de estados blobais com o Redux toolkit, utilização de componentes do Material UI que fortalecem questões de UX/UI da aplicação, Tailwind CSS para estilizações mais específicar e implementação de responsividade e Axios para a realização de requisições.
 
 # 🛠️ Tecnologias Utilizadas
 - ⚡ Next.js 15+
@@ -17,7 +17,7 @@ Este projeto de gestão de usuários utiliza Next 15+ e React, com forte tipagem
   - 🌈 Tailwind CSS
 - 📏 ESLint
 - 🚀 Turbopack
-- 🌐 cURL
+- 🌐 Axios
 - 🧩 Git
 
 ### ✅ Pré-requisitos
