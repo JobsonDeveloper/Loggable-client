@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import AlertSlice from '@/store/reducers/Alert'
+import GlobalLoading from '@/store/reducers/GlobalLoading'
 
 export const store = configureStore({
     reducer: {
-        alert: AlertSlice
+        globalLoading: GlobalLoading
     },
     // middleware: (getDefaultMiddleware) =>
         // getDefaultMiddleware().concat.(api.middleware)

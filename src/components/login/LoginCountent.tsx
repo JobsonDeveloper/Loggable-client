@@ -13,14 +13,16 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { setToast } from "@/utils/setToast";
 import FormHelperText from "@mui/material/FormHelperText";
 import { dataValidator } from "@/utils/dataValidator";
-import CircularProgress from "@mui/material/CircularProgress";
 import { useAuth } from "@/hooks/auth";
 import { useRouter } from "next/navigation";
-import { SimpleLink } from "../SimpleLink";
+import { useDispatch } from "react-redux";
+import { showLoading } from "@/store/reducers/GlobalLoading";
+import { DefaultForm } from "../DefaultForm";
 
-export const Form = () => {
+export const LoginCountent = () => {
   const { login } = useAuth();
   const nextRouter = useRouter();
+  const dispatch = useDispatch();
   const { emailValidator, passwordValidator } = dataValidator();
   const { errorToast, warningToast, successToast } = setToast();
   const [loginLoading, setloginLoading] = useState(false);
@@ -129,91 +131,72 @@ export const Form = () => {
   };
 
   const handleRegisterRedirect = () => {
+    dispatch(showLoading());
     nextRouter.push("/register");
   };
 
   return (
-    <article className="flex flex-col justify-between px-8 py-4">
-      <header className="flex flex-col items-center justify-center justify-center w-80 h-32">
-        <h2 className="font-bold text-[1.5rem] text-center">
+    <DefaultForm
+      headerTitle={
+        <>
           Bem vindo ao <span className="text-blue-600">Loggable!</span>
-        </h2>
-      </header>
+        </>
+      }
+      submitFunction={verifyLoginData}
+      submitText="Login"
+      subRedirectFunction={handleRegisterRedirect}
+      subRedirectText="Não sou cadastrado"
+      loginLoading={loginLoading}
+    >
+      <li>
+        <TextField
+          className="w-80"
+          type="email"
+          id="user-login-email"
+          label="E-mail"
+          variant="standard"
+          helperText={email.helperText}
+          error={!email.valid}
+          onChange={(e) => handelSetEmail(e.target.value)}
+        />
+      </li>
 
-      <ul className="flex flex-col pb-16 pt-8 md:pb-0 md:pt-16 gap-8 flex-1">
-        <li>
-          <TextField
+      <li className="mb-8">
+        <FormControl variant="standard">
+          <InputLabel
+            htmlFor="user-login-password"
+            style={{
+              color: `${password.valid ? "" : "#d32f2f"}`,
+            }}
+          >
+            Password
+          </InputLabel>
+          <Input
+            id="user-login-password"
+            type={password.show ? "text" : "password"}
             className="w-80"
-            type="email"
-            id="standard-basic"
-            label="E-mail"
-            variant="standard"
-            helperText={email.helperText}
-            error={!email.valid}
-            onChange={(e) => handelSetEmail(e.target.value)}
+            onChange={(e) => handelSetPassword(e.target.value)}
+            error={!password.valid}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={
+                    password.show ? "hide the password" : "display the password"
+                  }
+                  onClick={handleClickShowPassword}
+                >
+                  {password.show ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
           />
-        </li>
-
-        <li>
-          <FormControl variant="standard">
-            <InputLabel
-              htmlFor="standard-adornment-password"
-              style={{
-                color: `${password.valid ? "" : "#d32f2f"}`,
-              }}
-            >
-              Password
-            </InputLabel>
-            <Input
-              id="standard-adornment-password"
-              type={password.show ? "text" : "password"}
-              className="w-80"
-              onChange={(e) => handelSetPassword(e.target.value)}
-              error={!password.valid}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label={
-                      password.show
-                        ? "hide the password"
-                        : "display the password"
-                    }
-                    onClick={handleClickShowPassword}
-                  >
-                    {password.show ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-            {!password.valid && (
-              <FormHelperText error={!password.valid}>
-                {password.helperText}
-              </FormHelperText>
-            )}
-          </FormControl>
-        </li>
-      </ul>
-
-      <footer className="flex flex-col gap-4 items-center justify-center h-32">
-        <button
-          className={`${
-            loginLoading
-              ? ""
-              : "hover:shadow-none hover:bg-blue-600 cursor-pointer"
-          } flex items-center justify-center bg-blue-500 w-full h-14 rounded-3xl outline-none shadow-lg text-gray-100 text-lg font-bold`}
-          onClick={verifyLoginData}
-          disabled={loginLoading}
-        >
-          {loginLoading ? (
-            <CircularProgress size="30px" color="inherit" />
-          ) : (
-            <>Login</>
+          {!password.valid && (
+            <FormHelperText error={!password.valid}>
+              {password.helperText}
+            </FormHelperText>
           )}
-        </button>
-        <SimpleLink onClick={handleRegisterRedirect}>
-          Não sou cadastrado
-        </SimpleLink>
-      </footer>
-    </article>
+        </FormControl>
+      </li>
+    </DefaultForm>
   );
 };
