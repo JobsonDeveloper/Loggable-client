@@ -1,24 +1,24 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { ToastContainer } from "react-toastify";
 import { GlobalProviders } from "./GlobalProviders";
+import { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
+export const metadata: Metadata = {
+  title: "Loggable",
+  description: "The best site for login",
+  icons: '/loggableIcon.png'
+}
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "Loggagle",
-  icons: "/loggableIcon.png",
-  description: "Loggagle App",
-};
 
 export default function RootLayout({
   children,

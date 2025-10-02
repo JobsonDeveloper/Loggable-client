@@ -1,10 +1,10 @@
 "use client";
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import React, { ReactNode } from "react";
 
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
-import React, { ReactNode } from "react";
 
 const theme = createTheme({});
 
@@ -14,8 +14,8 @@ type props = {
 
 export const GlobalProviders = ({ children }: props) => {
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>{children}</Provider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </Provider>
   );
 };

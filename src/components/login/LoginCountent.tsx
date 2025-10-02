@@ -29,13 +29,13 @@ export const LoginCountent = () => {
   const [email, setEmail] = useState({
     value: "",
     valid: true,
-    helperText: "",
+    helperText: " ",
   });
   const [password, setPassword] = useState({
     value: "",
     show: false,
     valid: true,
-    helperText: "",
+    helperText: " ",
   });
 
   const handelSetEmail = (userEmail: string) => {
@@ -44,7 +44,7 @@ export const LoginCountent = () => {
     setEmail({
       valid: valid,
       value: userEmail,
-      helperText: valid ? "" : "E-mail inválido!",
+      helperText: valid ? " " : "E-mail inválido!",
     });
   };
 
@@ -55,7 +55,7 @@ export const LoginCountent = () => {
       ...prev,
       valid: valid,
       value: userPassword,
-      helperText: valid ? "" : "Senha inválida!",
+      helperText: valid ? " " : "Senha inválida!",
     }));
   };
 
@@ -66,7 +66,7 @@ export const LoginCountent = () => {
     }));
   };
 
-  const hundleLogin = async () => {
+  const handleLogin = async () => {
     try {
       setloginLoading(true);
 
@@ -83,11 +83,11 @@ export const LoginCountent = () => {
           userToken
         );
 
-        // REDIRECT
-        successToast("OK");
+        nextRouter.push("/home");
       }
     } catch (error: any) {
       const errorStatus = error.status;
+      setloginLoading(false);
 
       if (errorStatus == 403 || errorStatus == 401) {
         setEmail((prev) => ({
@@ -104,8 +104,6 @@ export const LoginCountent = () => {
       } else {
         errorToast("Erro ao fazer login!");
       }
-    } finally {
-      setloginLoading(false);
     }
   };
 
@@ -113,9 +111,7 @@ export const LoginCountent = () => {
     const validEmail = emailValidator(email.value);
     const validPassword = passwordValidator(password.value);
 
-    if (validEmail && validPassword) {
-      hundleLogin();
-    } else {
+    if (!validEmail || !validPassword) {
       setEmail((prev) => ({
         ...prev,
         valid: validEmail,
@@ -127,7 +123,10 @@ export const LoginCountent = () => {
       }));
 
       warningToast("Usuário ou senha inválidos!");
+      return;
     }
+
+    handleLogin();
   };
 
   const handleRegisterRedirect = () => {
@@ -146,7 +145,8 @@ export const LoginCountent = () => {
       submitText="Login"
       subRedirectFunction={handleRegisterRedirect}
       subRedirectText="Não sou cadastrado"
-      loginLoading={loginLoading}
+      loading={loginLoading}
+      listClassName="gap-8"
     >
       <li>
         <TextField
@@ -158,6 +158,7 @@ export const LoginCountent = () => {
           helperText={email.helperText}
           error={!email.valid}
           onChange={(e) => handelSetEmail(e.target.value)}
+          onKeyDown={(e) => (e.key === "Enter" ? verifyLoginData() : {})}
         />
       </li>
 
@@ -176,6 +177,7 @@ export const LoginCountent = () => {
             type={password.show ? "text" : "password"}
             className="w-80"
             onChange={(e) => handelSetPassword(e.target.value)}
+            onKeyDown={(e) => (e.key === "Enter" ? verifyLoginData() : {})}
             error={!password.valid}
             endAdornment={
               <InputAdornment position="end">
@@ -190,11 +192,9 @@ export const LoginCountent = () => {
               </InputAdornment>
             }
           />
-          {!password.valid && (
-            <FormHelperText error={!password.valid}>
-              {password.helperText}
-            </FormHelperText>
-          )}
+          <FormHelperText error={!password.valid}>
+            {password.helperText}
+          </FormHelperText>
         </FormControl>
       </li>
     </DefaultForm>

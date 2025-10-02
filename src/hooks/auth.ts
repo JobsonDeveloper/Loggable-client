@@ -1,32 +1,26 @@
 import axios from "@/lib/axios";
-
-type userCredentials = {
-  firstName: string;
-  lastName: string;
-  userEmail: string;
-  userPassword: string;
-  confirmPassword: string;
-};
+import User from "@/model/User";
 
 export const useAuth = () => {
   const login = ({
     userEmail,
     userPassword,
-  }: Omit<userCredentials, "firstName" | "lastName" | "confirmPassword">) => {
-    return axios.post("/api/user/login", {
+  }: Pick<User, "userEmail" | "userPassword">) => {
+    return axios.post("/api/auth/login", {
       email: userEmail,
       password: userPassword,
     });
   };
 
-  const register = ({
-    firstName,
-    lastName,
-    userEmail,
-    userPassword,
-    confirmPassword,
-  }: userCredentials) => {
-    return axios.post("/api/user/register", {
+  const logout = () => {
+    return axios.post("/api/auth/logout");
+  };
+
+  const register = (
+    { firstName, lastName, userEmail, userPassword }: Omit<User, "id" | "role">,
+    confirmPassword: string
+  ) => {
+    return axios.post("/api/auth/register", {
       firstName: firstName,
       lastName: lastName,
       email: userEmail,
@@ -35,5 +29,13 @@ export const useAuth = () => {
     });
   };
 
-  return { login, register };
+  const deleteUser = ({ id }: Pick<User, "id">) => {
+    return axios.delete(`/api/user/delete/${id}`);
+  };
+
+  const getUser = () => {
+    return axios.get("/api/user/info");
+  };
+
+  return { login, register, getUser, logout, deleteUser };
 };
