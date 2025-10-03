@@ -126,11 +126,11 @@ export const RegisterCountent = () => {
   };
 
   const verifyRegisterData = () => {
-    const userFirstName = !firstName.error;
-    const userLastName = !lastName.error;
-    const userEmail = !email.error;
-    const userPassword = !password.error;
-    const userConfirmPassword = !confirmPassword.error;
+    const userFirstName = firstName.error;
+    const userLastName = lastName.error;
+    const userEmail = email.error;
+    const userPassword = password.error;
+    const userConfirmPassword = confirmPassword.error;
 
     if (
       userFirstName ||

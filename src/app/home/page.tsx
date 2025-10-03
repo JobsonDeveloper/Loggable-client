@@ -281,7 +281,7 @@ export default function Home() {
 
               <article>
                 <h2 className="text-2xl font-bold py-8">
-                  Tecnologias Utilizadas
+                  Algumas das ferramentas Utilizadas
                 </h2>
                 <ul className="flex flex-wrap gap-2 list-inside space-y-1 text-gray-700">
                   <li className="p-1 rounded-lg shadow-lg w-11 h-11 bg-gray-200 hover:bg-blue-200 cursor-pointer">
