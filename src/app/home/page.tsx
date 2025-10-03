@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+
 import {
   SiAxios,
   SiDocker,
@@ -19,29 +22,21 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa6";
-import Tooltip from "@mui/material/Tooltip";
-import Button from "@mui/material/Button";
-import { useRouter } from "next/navigation";
-import { hideLoading, showLoading } from "@/store/reducers/GlobalLoading";
-import { useDispatch, useSelector } from "react-redux";
+
 import CircularProgress from "@mui/material/CircularProgress";
-import { useAuth } from "@/hooks/auth";
-import { setToast } from "@/utils/setToast";
-import { setUser } from "@/store/reducers/User";
-import User from "@/model/User";
-import { RootReducer } from "@/store/store";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
-
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
 import ListItem from "@mui/material/ListItem";
+
+import { hideLoading, showLoading } from "@/store/reducers/GlobalLoading";
+import { useAuth } from "@/hooks/auth";
+import User from "@/model/User";
+import { setToast } from "@/utils/setToast";
+import { setUser } from "@/store/reducers/User";
+import { RootReducer } from "@/store/store";
 
 export default function Home() {
   const { errorToast } = setToast();
@@ -194,7 +189,9 @@ export default function Home() {
                           </button>
                         )}
                         <button
-                          className={`${role === "ADMIN" ? "rounded-b-lg" : "rounded-br-lg" } bg-[#85a1ff] hover:bg-[#6b8dff] cursor-pointer h-12 w-full text-white`}
+                          className={`${
+                            role === "ADMIN" ? "rounded-b-lg" : "rounded-br-lg"
+                          } bg-[#85a1ff] hover:bg-[#6b8dff] cursor-pointer h-12 w-full text-white`}
                           onClick={handleLogout}
                           disabled={loading}
                         >

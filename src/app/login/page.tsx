@@ -1,9 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import { Wallpaper } from "@/components/Wallpaper";
 import { LoginCountent } from "@/components/login/LoginCountent";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { hideLoading } from "@/store/reducers/GlobalLoading";
 import { RootReducer } from "@/store/store";
 import CircularProgress from "@mui/material/CircularProgress";

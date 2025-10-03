@@ -24,7 +24,7 @@ export const LoginCountent = () => {
   const nextRouter = useRouter();
   const dispatch = useDispatch();
   const { emailValidator, passwordValidator } = dataValidator();
-  const { errorToast, warningToast, successToast } = setToast();
+  const { errorToast, warningToast } = setToast();
   const [loginLoading, setloginLoading] = useState(false);
   const [email, setEmail] = useState({
     value: "",
@@ -78,6 +78,7 @@ export const LoginCountent = () => {
       const userToken = response?.data?.accessToken;
 
       if (userToken) {
+        dispatch(showLoading());
         sessionStorage.setItem(
           "PfpO7Rj_eTDF8pEdvZsHS0f9GIeV0iq-Ijug-WWAnsc",
           userToken

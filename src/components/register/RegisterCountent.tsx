@@ -9,11 +9,10 @@ import { useState } from "react";
 import { dataValidator } from "@/utils/dataValidator";
 import { setToast } from "@/utils/setToast";
 import { useAuth } from "@/hooks/auth";
-import User from "@/model/User";
 
 const defaultData = {
   value: "",
-  error: true,
+  error: false,
   helperText: " ",
 };
 
@@ -35,7 +34,7 @@ export const RegisterCountent = () => {
 
     setFirstName({
       value: userFirstName,
-      error: valid,
+      error: !valid,
       helperText: valid ? " " : "Nome inválido!",
     });
   };
@@ -45,7 +44,7 @@ export const RegisterCountent = () => {
 
     setLastName({
       value: userLastName,
-      error: valid,
+      error: !valid,
       helperText: valid ? " " : "Sobrenome inválido!",
     });
   };
@@ -55,7 +54,7 @@ export const RegisterCountent = () => {
 
     setEmail({
       value: userEmail,
-      error: valid,
+      error: !valid,
       helperText: valid ? " " : "E-mail inválido!",
     });
   };
@@ -65,7 +64,7 @@ export const RegisterCountent = () => {
 
     setPassword({
       value: userPassword,
-      error: valid,
+      error: !valid,
       helperText: valid ? " " : "Senha inválida!",
     });
   };
@@ -76,7 +75,7 @@ export const RegisterCountent = () => {
 
     setConfirmPassword({
       value: userConfirmPassword,
-      error: valid && passwordsEquals,
+      error: !valid || !passwordsEquals,
       helperText: valid
         ? passwordsEquals
           ? " "
@@ -126,11 +125,12 @@ export const RegisterCountent = () => {
   };
 
   const verifyRegisterData = () => {
-    const userFirstName = firstName.error;
-    const userLastName = lastName.error;
-    const userEmail = email.error;
-    const userPassword = password.error;
-    const userConfirmPassword = confirmPassword.error;
+    const userFirstName = !firstName.value || firstName.error;
+    const userLastName = !lastName.value || lastName.error;
+    const userEmail = !email.value || email.error;
+    const userPassword = !password.value || password.error;
+    const userConfirmPassword = !confirmPassword.value || confirmPassword.error;
+
 
     if (
       userFirstName ||
@@ -174,7 +174,7 @@ export const RegisterCountent = () => {
           label="Nome"
           variant="standard"
           helperText={firstName.helperText}
-          error={!firstName.error}
+          error={firstName.error}
           onChange={(e) => {
             handleSetFirstName(e.target.value);
           }}
@@ -189,7 +189,7 @@ export const RegisterCountent = () => {
           label="Sobrenome"
           variant="standard"
           helperText={lastName.helperText}
-          error={!lastName.error}
+          error={lastName.error}
           onChange={(e) => {
             handleSetLastName(e.target.value);
           }}
@@ -204,7 +204,7 @@ export const RegisterCountent = () => {
           label="E-mail"
           variant="standard"
           helperText={email.helperText}
-          error={!email.error}
+          error={email.error}
           onChange={(e) => {
             handleSetEmail(e.target.value);
           }}
@@ -219,7 +219,7 @@ export const RegisterCountent = () => {
           label="Senha"
           variant="standard"
           helperText={password.helperText}
-          error={!password.error}
+          error={password.error}
           onChange={(e) => {
             handleSetPassword(e.target.value);
           }}
@@ -234,7 +234,7 @@ export const RegisterCountent = () => {
           label="Confirmação da senha"
           variant="standard"
           helperText={confirmPassword.helperText}
-          error={!confirmPassword.error}
+          error={confirmPassword.error}
           onChange={(e) => {
             handleSetConfirmPassword(e.target.value);
           }}
