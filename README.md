@@ -11,10 +11,10 @@ Este projeto de gestão de usuários utiliza Next 15+ e React, com forte tipagem
 #### Obs: O objetivo principal deste projeto foi conhecer melhor o Back-End juntamente com Java e Spring-Boot, por conta disto não houve foco no Front-End.
 
 # 🛠️ Tecnologias Utilizadas
-- ⚡ Next.js 15+
+- ⚡ Next.js
 - ⚛️ React
   - 🟦 TypeScript
-  - 🛠️ Redux Toolkit
+  - 🛠️ Redux
   - 🎨 Material UI
   - 🌈 Tailwind CSS
 - 📏 ESLint
